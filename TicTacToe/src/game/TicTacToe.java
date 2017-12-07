@@ -16,7 +16,9 @@ public class TicTacToe {
 		grid = new TicTacToeGrid();
 		
 		frame.add(grid);
+		frame.setResizable(false);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
