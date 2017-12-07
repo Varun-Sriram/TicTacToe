@@ -4,6 +4,7 @@ public class Tile {
 	private final int ROW;
 	private final int COL;
 	private boolean isMarked;
+	private boolean isCircleMark;
 	
 	public static final int WIDTH = TicTacToeGrid.SCREEN_WIDTH / 3;
 	public static final int HEIGHT = TicTacToeGrid.SCREEN_HEIGHT / 3;
@@ -44,6 +45,14 @@ public class Tile {
 	
 	public void setMarked(boolean isMarked) {
 		this.isMarked = isMarked;
+	}
+	
+	public boolean isCircleMark() {
+		return isCircleMark;
+	}
+	
+	public void setCircleMark(boolean isCircleMark) {
+		this.isCircleMark = isCircleMark;
 	}
 	
 	@Override

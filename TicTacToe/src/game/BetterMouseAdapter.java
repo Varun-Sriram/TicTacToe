@@ -6,10 +6,12 @@ import java.awt.event.MouseEvent;
 public class BetterMouseAdapter extends MouseAdapter {
 	private TicTacToeGrid ref;
 	private Tile[][] gridRef;
+	private boolean nextMarkIsCircle;
 	
 	public BetterMouseAdapter(TicTacToeGrid ref, Tile[][] gridRef) {
 		this.ref = ref;
 		this.gridRef = gridRef;
+		this.nextMarkIsCircle = false;
 	}
 	
 	@Override
@@ -34,6 +36,21 @@ public class BetterMouseAdapter extends MouseAdapter {
 				
 				if (e.getX() >= xMin && e.getX() <= xMax && e.getY() >= yMin && e.getY() <= yMax) {
 					grab = t;
+					
+					//check for re-writing values...?
+					if (grab.isMarked()) {
+						throw new RuntimeException("yo no touchy");
+					}
+					
+					if (nextMarkIsCircle) {
+						grab.setMarked(true);
+						grab.setCircleMark(true);
+						this.nextMarkIsCircle = false;
+					} else {
+						grab.setMarked(true);
+						grab.setCircleMark(false);
+						this.nextMarkIsCircle = true;
+					}
 				}
 			}
 		}

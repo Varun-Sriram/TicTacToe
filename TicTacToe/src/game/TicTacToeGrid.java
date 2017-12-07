@@ -57,13 +57,17 @@ public class TicTacToeGrid extends JComponent {
 		for (Tile[] tilesRow : grid) {
 			for (Tile t : tilesRow) {
 				if (t.isMarked()) {
-					drawMark(g, t.getWidthRange()[0], t.getHeightRange()[0], t.getWidth(), t.getHeight());
+					drawMark(g, t, t.getWidthRange()[0], t.getHeightRange()[0], t.getWidth(), t.getHeight());
 				}
 			}
 		}
 	}
 
-	private void drawMark(Graphics g, int leftCornerX, int leftCornerY, int width, int height) {
-		g.drawRect(leftCornerX + (width / 4), leftCornerY + (height / 4), width / 2, height / 2);
+	private void drawMark(Graphics g, Tile tileRef, int leftCornerX, int leftCornerY, int width, int height) {
+		if (tileRef.isCircleMark()) {
+			g.drawOval(leftCornerX + (width / 4), leftCornerY + (height / 4), width / 2, height / 2);			
+		} else {
+			g.drawRect(leftCornerX + (width / 4), leftCornerY + (height / 4), width / 2, height / 2);
+		}
 	}
 }
