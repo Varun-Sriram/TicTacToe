@@ -3,15 +3,17 @@ package game;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import game.Player.Shape;
+
 public class BetterMouseAdapter extends MouseAdapter {
 	private TicTacToeGrid ref;
 	private Tile[][] gridRef;
-	private boolean nextMarkIsCircle;
+	private int turnCount;
 	
 	public BetterMouseAdapter(TicTacToeGrid ref, Tile[][] gridRef) {
 		this.ref = ref;
 		this.gridRef = gridRef;
-		this.nextMarkIsCircle = false;
+		this.turnCount = 0;
 	}
 	
 	@Override
@@ -37,26 +39,23 @@ public class BetterMouseAdapter extends MouseAdapter {
 				if (e.getX() >= xMin && e.getX() <= xMax && e.getY() >= yMin && e.getY() <= yMax) {
 					grab = t;
 					
-					//check for re-writing values...?
+					//check for re-writing values = do nothing if so
 					if (grab.isMarked()) {
-						throw new RuntimeException("yo no touchy");
+						return;
 					}
 					
-					if (nextMarkIsCircle) {
-						grab.setMarked(true);
-						grab.setCircleMark(true);
-						this.nextMarkIsCircle = false;
+					if (turnCount == 0) {
+						//first player
+						grab.mark(new Player(Shape.X));
+						turnCount++;
 					} else {
-						grab.setMarked(true);
-						grab.setCircleMark(false);
-						this.nextMarkIsCircle = true;
+						//second player
+						grab.mark(new Player(Shape.CIRCLE));
+						turnCount--;
 					}
 				}
 			}
 		}
-		
-		//set the tile to have it being marked
-		grab.setMarked(true);
 		
 		//repaint the canvas
 		ref.repaint();

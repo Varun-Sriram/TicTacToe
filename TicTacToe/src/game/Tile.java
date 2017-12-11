@@ -3,8 +3,7 @@ package game;
 public class Tile {
 	private final int ROW;
 	private final int COL;
-	private boolean isMarked;
-	private boolean isCircleMark;
+	private Player player;
 	
 	public static final int WIDTH = TicTacToeGrid.SCREEN_WIDTH / 3;
 	public static final int HEIGHT = TicTacToeGrid.SCREEN_HEIGHT / 3;
@@ -12,7 +11,7 @@ public class Tile {
 	public Tile(int row, int col) {
 		this.ROW = row;
 		this.COL = col;
-		this.isMarked = false;
+		this.player = null;
 	}
 	
 	public int getWidth() {
@@ -39,20 +38,16 @@ public class Tile {
 		return new int[] {COL * HEIGHT, (COL + 1) * HEIGHT};
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public boolean isMarked() {
-		return isMarked;
+		return (!(player == null));
 	}
 	
-	public void setMarked(boolean isMarked) {
-		this.isMarked = isMarked;
-	}
-	
-	public boolean isCircleMark() {
-		return isCircleMark;
-	}
-	
-	public void setCircleMark(boolean isCircleMark) {
-		this.isCircleMark = isCircleMark;
+	public void mark(Player p) {
+		player = p;
 	}
 	
 	@Override
